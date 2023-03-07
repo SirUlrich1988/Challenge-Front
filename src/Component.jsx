@@ -13,6 +13,7 @@ const Component = ({
     setSelected,
     isSelected = false,
     updateEnd,
+    imageUrl
   }) => {
     const ref = useRef()
 
@@ -114,7 +115,12 @@ const Component = ({
           left: left,
           width: width,
           height: height,
-          background: color,
+          backgroundImage: `url('${imageUrl}')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+
+
+
         }}
         onClick={() => setSelected(id)}
       />

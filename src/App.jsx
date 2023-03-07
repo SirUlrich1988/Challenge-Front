@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import Component from './Component';
 
@@ -6,9 +6,25 @@ import Component from './Component';
 
 function App() {
 
-
+  
   const [moveableComponents, setMoveableComponents] = useState([]);
   const [selected, setSelected] = useState(null);
+  const [photos, setPhotos] = useState([])
+  const [url, setUrl] = useState('')
+  
+  function getRandomPhotos() {
+    return Math.floor(Math.random() * 10)
+  }
+
+  async function getPhotos(n) {
+    const res = await fetch("https://jsonplaceholder.typicode.com/photos/" + n)
+    const data = await res.json()
+    setUrl(data.url)
+  }
+
+  useEffect(()=> {
+    setPhotos(getPhotos(getRandomPhotos()))
+  },[]) 
 
   const addMoveable = () => {
     // Create a new moveable component and add it to the array
@@ -82,6 +98,7 @@ function App() {
             handleResizeStart={handleResizeStart}
             setSelected={setSelected}
             isSelected={selected === item.id}
+            imageUrl={url}
           />
         ))}
       </div>
