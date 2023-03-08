@@ -108,7 +108,7 @@ const Component = ({
       <div
         ref={ref}
         className="draggable"
-        id={"component-" + id}
+        id={"component" + id}
         style={{
           position: "absolute",
           top: top,
